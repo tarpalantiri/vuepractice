@@ -10,18 +10,22 @@
       </div>
     </div>
     <div class="user-profile__tweets-wrapper">
-      <div class="user-profile__tweet" v-for="(tweet) in user.tweets" :key="tweet.id">
-      {{ tweet.content }}
-      </div>
+      <TweetItem
+      v-for="tweet in user.tweets"
+      :key="tweet.id"
+      :username="user.username"
+      :tweet="tweet"
+      />
     </div>
   </div>
 </template>
 
 <script>
-
+import TweetItem from 'src/components/TweetItem.vue';
 
 export default {
-  name: 'App',
+  name: 'UserProfile',
+  components: { TweetItem, },
   data() {
     return {
       followers: 0,
