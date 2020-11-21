@@ -1,10 +1,17 @@
 <template>
   <div class="user-profile">
     <div class="user-profile__user-panel">
-      <img src="./src/assets/user_default.PNG" alt="Default User Image">
       <h1 class="user-profile__username"> @{{user.username}} </h1>
+      <div class="user-profile__admin-badge" v-if="user.isAdmin">
+        Admin
+        </div>
       <div class="user-profile__follower-count">
         <strong>Followers:</strong> {{ followers }}
+      </div>
+    </div>
+    <div class="user-profile__tweets-wrapper">
+      <div class="user-profile__tweet" v-for="(tweet) in user.tweets" :key="tweet.id">
+      {{ tweet.content }}
       </div>
     </div>
   </div>
@@ -20,11 +27,15 @@ export default {
       followers: 0,
       user: {
         id: 1,
-        username: '@_TehseenSajjad',
+        username: '_TehseenSajjad',
         firstName: 'Tehseen',
         lastName: 'Sajjad',
         email: 'tehseenyoung@gmail.com',
-        isAdmin: true
+        isAdmin: true,
+        tweets: [
+          { id: 1, content: "Tweet Content :)" },
+          { id: 2, content: "Tweet Content # 2 :{}" }
+        ]
       }
     }
   },
@@ -73,8 +84,27 @@ export default {
   border: 1px solid #DFE2E8;
 }
 
-.user-profile__follower-count {
+/* .user-profile__follower-count {
   padding: 20px;
+} */
+
+.user-profile__admin-badge {
+  background: rebeccapurple;
+  color: white;
+  border-radius: 5px;
+  border: 1px solid rebeccapurple;
+  padding: 0px 15px;
+  margin-right: auto;
+  font-weight: bold;
+}
+
+div {
+  margin: 2px;
+}
+
+img {
+  height: 92px;
+  width: 92px;
 }
 
 h1 {
